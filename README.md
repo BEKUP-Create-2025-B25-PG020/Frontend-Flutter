@@ -1,3 +1,3 @@
-# mantra_application
+# BEKUP Create 2025 Mantra
 
-A new Flutter project.
+Capstone project for BEKUP Create 2025.

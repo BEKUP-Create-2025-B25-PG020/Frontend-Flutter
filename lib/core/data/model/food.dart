@@ -6,6 +6,7 @@ class Food {
   String name;
   String shortDescription;
   String mainImageUrl;
+  bool isFeatured;
   Region region;
   Category category;
 
@@ -14,6 +15,7 @@ class Food {
     required this.name,
     required this.shortDescription,
     required this.mainImageUrl,
+    required this.isFeatured,
     required this.region,
     required this.category,
   });
@@ -23,9 +25,10 @@ class Food {
       id: json['id'],
       name: json['name'],
       shortDescription: json['short_description'],
+      mainImageUrl: json['main_image_url'],
+      isFeatured: json['is_featured'],
       region: Region.fromJson(json["region"]),
       category: Category.fromJson(json["category"]),
-      mainImageUrl: json['main_image_url'],
     );
   }
 }

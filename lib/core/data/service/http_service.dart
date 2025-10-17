@@ -8,6 +8,12 @@ class HttpService {
   final String _baseUrl = dotenv.env['BASE_URL'] ?? "";
   final String _apiKey = dotenv.env['API_KEY'] ?? "";
 
+  Map<String, String> get _headers => {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "api_key": dotenv.env["API_KEY"] ?? "",
+  };
+
   Future<FoodResponse> getFoodList() async {
     final response = await http.get(
       Uri.parse("$_baseUrl/foods"),

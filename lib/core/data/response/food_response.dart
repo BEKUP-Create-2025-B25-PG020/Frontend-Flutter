@@ -15,7 +15,7 @@ class FoodResponse {
     return FoodResponse(
       success: json["success"],
       message: json["message"],
-      data: json["restaurants"] != null
+      data: json["data"] != null
           ? List<Food>.from(json["data"]!.map((x) => Food.fromJson(x)))
           : <Food>[],
     );

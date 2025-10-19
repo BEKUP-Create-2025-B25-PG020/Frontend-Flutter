@@ -8,15 +8,9 @@ class HttpService {
   final String _baseUrl = dotenv.env['BASE_URL'] ?? "";
   final String _apiKey = dotenv.env['API_KEY'] ?? "";
 
-  Map<String, String> get _headers => {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-    "api_key": dotenv.env["API_KEY"] ?? "",
-  };
-
   Future<FoodResponse> getFoodList() async {
     final response = await http.get(
-      Uri.parse("$_baseUrl/foods"),
+      Uri.parse("${_baseUrl}foods"),
       headers: {'x-api-key': _apiKey},
     );
     if (response.statusCode == 200) {
@@ -28,7 +22,7 @@ class HttpService {
 
   Future<FoodDetailResponse> getDetailFood(int id) async {
     final response = await http.get(
-      Uri.parse("$_baseUrl/foods/$id"),
+      Uri.parse("${_baseUrl}foods/$id"),
       headers: {'x-api-key': _apiKey},
     );
     if (response.statusCode == 200) {

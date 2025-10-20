@@ -35,6 +35,17 @@ class FoodCard extends StatelessWidget {
               width: double.infinity,
               height: compact ? 100 : 130,
               fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return Container(
+                  color: Colors.grey[200],
+                  alignment: Alignment.center,
+                  child: const Icon(
+                    Icons.broken_image,
+                    color: Colors.grey,
+                    size: 60,
+                  ),
+                );
+              },
             ),
           ),
           Padding(

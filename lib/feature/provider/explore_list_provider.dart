@@ -1,0 +1,32 @@
+import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:mantra_application/core/data/service/http_service.dart';
+import 'package:mantra_application/feature/static/explore_list_result_state.dart';
+
+class ExploreListProvider extends ChangeNotifier {
+  final HttpService _httpServices;
+
+  ExploreListProvider(this._httpServices);
+
+  ExploreListResultState _resultState = ExploreListNoneState();
+  ExploreListResultState get resultState => _resultState;
+
+  Future<void> fetchExploreList() async {
+    _resultState = ExploreListLoadingState();
+    notifyListeners();
+
+    try {
+      final result = await _httpServices.getFoodList();
+
+      if (result.data.isEmpty) {
+        _resultState = ExploreListErrorState("Data kosong");
+      } else {
+        _resultState = ExploreListLoadedState(result.data);
+      }
+    } on Exception catch (e, s) {
+      _resultState = ExploreListErrorState(e.toString());
+    } finally {
+      notifyListeners();
+    }
+  }
+}

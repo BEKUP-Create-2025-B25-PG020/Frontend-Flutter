@@ -47,6 +47,7 @@ class FoodCard extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
                     fontSize: compact ? 12 : 14,
+                    color: Colors.black,
                   ),
                 ),
                 const SizedBox(height: 2),
@@ -55,6 +56,7 @@ class FoodCard extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: compact ? 11 : 12,
+                    color: Colors.black,
                   ),
                 ),
                 const SizedBox(height: 8),

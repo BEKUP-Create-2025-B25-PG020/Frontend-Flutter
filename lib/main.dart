@@ -10,6 +10,8 @@ import 'package:mantra_application/feature/provider/featured_food_provider.dart'
 import 'package:mantra_application/feature/provider/food_detail_provider.dart';
 import 'package:mantra_application/feature/provider/food_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:mantra_application/feature/explore/explore_screen.dart';
+import 'package:mantra_application/feature/provider/explore_list_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,6 +29,7 @@ Future<void> main() async {
           create: (context) =>
               FoodProvider(httpService: context.read<HttpService>()),
         ),
+
         ChangeNotifierProvider(
           create: (context) =>
               FoodDetailProvider(httpService: context.read<HttpService>()),

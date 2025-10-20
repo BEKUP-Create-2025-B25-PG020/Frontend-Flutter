@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mantra_application/common/style/colors/colors.dart';
 import 'package:mantra_application/common/style/typography/mantra_text_style.dart';
 
-class AppTheme {
+class MantraTheme {
   static TextTheme get _textTheme {
     return TextTheme(
       displayLarge: MantraTextStyle.displayLarge,

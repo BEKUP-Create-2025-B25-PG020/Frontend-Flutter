@@ -13,7 +13,7 @@ class FoodDetailErrorState extends FoodDetailResultState {
 }
 
 class FoodDetailLoadedState extends FoodDetailResultState {
-  final List<FoodDetail> data;
+  final FoodDetail data;
 
   FoodDetailLoadedState(this.data);
 }

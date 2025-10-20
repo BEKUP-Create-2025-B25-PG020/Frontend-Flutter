@@ -5,7 +5,9 @@ import 'package:mantra_application/common/screen/main_screen.dart';
 import 'package:mantra_application/common/static/navigation_route.dart';
 import 'package:mantra_application/common/style/theme/mantra_theme.dart';
 import 'package:mantra_application/core/data/service/http_service.dart';
+import 'package:mantra_application/feature/detail/detail_screen.dart';
 import 'package:mantra_application/feature/provider/featured_food_provider.dart';
+import 'package:mantra_application/feature/provider/food_detail_provider.dart';
 import 'package:mantra_application/feature/provider/food_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -25,6 +27,10 @@ Future<void> main() async {
           create: (context) =>
               FoodProvider(httpService: context.read<HttpService>()),
         ),
+        ChangeNotifierProvider(
+          create: (context) =>
+              FoodDetailProvider(httpService: context.read<HttpService>()),
+        ),
       ],
       child: const MainApp(),
     ),
@@ -42,7 +48,12 @@ class MainApp extends StatelessWidget {
       darkTheme: MantraTheme.darkTheme,
       themeMode: ThemeMode.system,
       initialRoute: NavigationRoute.mainRoute.name,
-      routes: {NavigationRoute.mainRoute.name: (context) => const MainScreen()},
+      routes: {
+        NavigationRoute.mainRoute.name: (context) => const MainScreen(),
+        NavigationRoute.detailRoute.name: (context) => DetailScreen(
+          foodId: ModalRoute.of(context)?.settings.arguments as int,
+        ),
+      },
     );
   }
 }

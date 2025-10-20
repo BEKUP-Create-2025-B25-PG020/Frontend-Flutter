@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mantra_application/common/static/food_list_result_state.dart';
 import 'package:mantra_application/common/style/colors/colors.dart';
+import 'package:mantra_application/feature/detail/detail_screen.dart';
 import 'package:mantra_application/feature/provider/food_provider.dart';
 import 'package:mantra_application/feature/widgets/featured_food_card.dart';
 import 'package:mantra_application/feature/widgets/food_card.dart';
@@ -91,7 +92,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                     right: 12.0,
                                     left: 12,
                                   ),
-                                  child: FeaturedFoodCard(food: food),
+                                  child: FeaturedFoodCard(
+                                    food: food,
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              DetailScreen(foodId: food.id),
+                                        ),
+                                      );
+                                    },
+                                  ),
                                 );
                               },
                             ),
@@ -173,6 +185,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                   final food = state.data[index];
                                   return FoodCard(
                                     food: food,
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              DetailScreen(foodId: food.id),
+                                        ),
+                                      );
+                                    },
                                     compact: isGridView,
                                   );
                                 },
@@ -197,6 +218,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                         MediaQuery.of(context).size.width * 0.9,
                                     child: FoodCard(
                                       food: food,
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                DetailScreen(foodId: food.id),
+                                          ),
+                                        );
+                                      },
                                       compact: isGridView,
                                     ),
                                   ),

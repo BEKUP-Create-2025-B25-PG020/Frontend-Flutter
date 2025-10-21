@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mantra_application/feature/explore/explore_screen.dart';
 import 'package:mantra_application/feature/home/home_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:mantra_application/common/provider/index_nav_provider.dart';
@@ -16,7 +17,7 @@ class MainScreen extends StatelessWidget {
         index: navProvider.indexBottomNavBar,
         children: const [
           HomeScreen(),
-          // ExploreScreen(),  //<--- WIP
+          ExploreScreen(),
           // FavoriteScreen()  //<--- WIP
         ],
       ),

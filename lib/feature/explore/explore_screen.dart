@@ -1,10 +1,17 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+<<<<<<< HEAD
 import 'package:mantra_application/feature/provider/explore_list_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:mantra_application/feature/static/explore_list_result_state.dart';
 import 'package:mantra_application/feature/explore/explore_card_widget.dart';
+=======
+import 'package:mantra_application/common/static/explore_list_result_state.dart';
+import 'package:mantra_application/feature/provider/explore_list_provider.dart';
+import 'package:mantra_application/feature/widgets/explore_card_widget.dart';
+import 'package:provider/provider.dart';
+>>>>>>> d05e63a66e89ab96d1424517538b04f5d670aa9d
 import 'package:mantra_application/common/static/navigation_route.dart';
 
 class ExploreScreen extends StatefulWidget {
@@ -49,12 +56,23 @@ class _ExploreScreenState extends State<ExploreScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+<<<<<<< HEAD
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
         title: SvgPicture.asset('assets/image/appbar-logo.svg', height: 32),
         centerTitle: false,
         backgroundColor: Colors.white,
         elevation: 2,
+=======
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: SvgPicture.asset('assets/image/appbar-logo.svg', height: 40),
+        centerTitle: false,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        surfaceTintColor: Colors.transparent,
+>>>>>>> d05e63a66e89ab96d1424517538b04f5d670aa9d
       ),
       body: Consumer<ExploreListProvider>(
         builder: (context, provider, child) {
@@ -65,7 +83,11 @@ class _ExploreScreenState extends State<ExploreScreen> {
           } else if (state is ExploreListLoadedState) {
             final allFoods = state.data;
 
+<<<<<<< HEAD
             // 🔍 Filter hasil pencarian
+=======
+            // Filter hasil pencarian
+>>>>>>> d05e63a66e89ab96d1424517538b04f5d670aa9d
             final filteredFoods = allFoods
                 .where(
                   (food) =>
@@ -78,7 +100,11 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
             return Column(
               children: [
+<<<<<<< HEAD
                 // 🔎 Search Bar
+=======
+                // Search Bar
+>>>>>>> d05e63a66e89ab96d1424517538b04f5d670aa9d
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
@@ -108,7 +134,10 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   ),
                 ),
 
+<<<<<<< HEAD
                 // 📜 Daftar ExploreCard
+=======
+>>>>>>> d05e63a66e89ab96d1424517538b04f5d670aa9d
                 Expanded(
                   child: filteredFoods.isEmpty
                       ? const Center(
@@ -117,8 +146,19 @@ class _ExploreScreenState extends State<ExploreScreen> {
                             style: TextStyle(fontSize: 16),
                           ),
                         )
+<<<<<<< HEAD
                       : ListView.builder(
                           itemCount: filteredFoods.length,
+=======
+                      : ListView.separated(
+                          itemCount: filteredFoods.length,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 14,
+                            vertical: 10,
+                          ),
+                          separatorBuilder: (context, index) =>
+                              const SizedBox(height: 14),
+>>>>>>> d05e63a66e89ab96d1424517538b04f5d670aa9d
                           itemBuilder: (context, index) => ExploreCard(
                             food: filteredFoods[index],
                             onTap: () {

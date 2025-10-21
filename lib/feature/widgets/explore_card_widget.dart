@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mantra_application/core/data/model/food.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 class ExploreCard extends StatelessWidget {
   final Food food;
@@ -12,76 +11,82 @@ class ExploreCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-        child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          elevation: 4,
-          clipBehavior: Clip.antiAlias,
-          child: Stack(
-            alignment: Alignment.bottomCenter,
-            children: [
-              // --- Gambar utama ---
-              SizedBox(
+      child: Container(
+        width: 350,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.05),
+              blurRadius: 6,
+              offset: const Offset(0, 3),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(16),
+                topRight: Radius.circular(16),
+              ),
+              child: Image.network(
+                food.mainImageUrl,
                 width: double.infinity,
-                height: 224,
-                child: CachedNetworkImage(
-                  imageUrl: food.mainImageUrl,
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) => Container(
+                height: 130,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
                     color: Colors.grey[200],
-                    child: const Center(
-                      child: CircularProgressIndicator(strokeWidth: 2),
+                    alignment: Alignment.center,
+                    child: const Icon(
+                      Icons.broken_image,
+                      color: Colors.grey,
+                      size: 130,
+                    ),
+                  );
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    food.name,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                      color: Colors.black,
                     ),
                   ),
-                  errorWidget: (context, url, error) =>
-                      const Icon(Icons.error_outline),
-                ),
-              ),
-
-              // --- Overlay putih berisi teks ---
-              Container(
-                width: double.infinity,
-                color: Colors.white.withOpacity(0.9),
-                padding: const EdgeInsets.all(8),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Baris atas: nama dan region
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            food.name,
-                            style: Theme.of(context).textTheme.bodyLarge,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          food.region.regionName,
-                          style: Theme.of(context).textTheme.labelLarge,
-                        ),
-                      ],
+                  const SizedBox(height: 2),
+                  Text(
+                    food.region.regionName,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 12,
+                      color: Colors.black87,
                     ),
-                    const SizedBox(height: 4),
-
-                    // Deskripsi singkat
-                    Text(
-                      food.shortDescription,
-                      style: Theme.of(context).textTheme.labelMedium,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    food.shortDescription,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Colors.black87,
+                      height: 1.4,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

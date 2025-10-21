@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mantra_application/common/static/explore_list_result_state.dart';
 import 'package:mantra_application/feature/provider/explore_list_provider.dart';
+import 'package:mantra_application/feature/widgets/explore_card_widget.dart';
 import 'package:provider/provider.dart';
-import 'package:mantra_application/feature/static/explore_list_result_state.dart';
-import 'package:mantra_application/feature/explore/explore_card_widget.dart';
 import 'package:mantra_application/common/static/navigation_route.dart';
 
 class ExploreScreen extends StatefulWidget {
@@ -49,12 +49,14 @@ class _ExploreScreenState extends State<ExploreScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: SvgPicture.asset('assets/image/appbar-logo.svg', height: 32),
+        title: SvgPicture.asset('assets/image/appbar-logo.svg', height: 40),
         centerTitle: false,
         backgroundColor: Colors.white,
-        elevation: 2,
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        surfaceTintColor: Colors.transparent,
       ),
       body: Consumer<ExploreListProvider>(
         builder: (context, provider, child) {
@@ -65,7 +67,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
           } else if (state is ExploreListLoadedState) {
             final allFoods = state.data;
 
-            // 🔍 Filter hasil pencarian
+            // Filter hasil pencarian
             final filteredFoods = allFoods
                 .where(
                   (food) =>
@@ -78,7 +80,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
             return Column(
               children: [
-                // 🔎 Search Bar
+                // Search Bar
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
@@ -108,7 +110,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   ),
                 ),
 
-                // 📜 Daftar ExploreCard
                 Expanded(
                   child: filteredFoods.isEmpty
                       ? const Center(
@@ -117,8 +118,14 @@ class _ExploreScreenState extends State<ExploreScreen> {
                             style: TextStyle(fontSize: 16),
                           ),
                         )
-                      : ListView.builder(
+                      : ListView.separated(
                           itemCount: filteredFoods.length,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 14,
+                            vertical: 10,
+                          ),
+                          separatorBuilder: (context, index) =>
+                              const SizedBox(height: 14),
                           itemBuilder: (context, index) => ExploreCard(
                             food: filteredFoods[index],
                             onTap: () {

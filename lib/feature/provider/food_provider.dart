@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mantra_application/common/static/food_list_result_state.dart';
+import 'package:mantra_application/core/data/model/food.dart';
 import 'package:mantra_application/core/data/service/http_service.dart';
 
 class FoodProvider extends ChangeNotifier {
@@ -22,5 +23,12 @@ class FoodProvider extends ChangeNotifier {
     }
 
     notifyListeners();
+  }
+
+  List<Food> get foods {
+    if (_state is FoodListLoadedState) {
+      return (_state as FoodListLoadedState).data;
+    }
+    return [];
   }
 }

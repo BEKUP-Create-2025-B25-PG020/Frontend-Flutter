@@ -95,7 +95,11 @@ class BodyOfDetailScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Positioned(right: 4, top: 12, child: FavoriteButton()),
+                    Positioned(
+                      right: 4,
+                      top: 12,
+                      child: FavoriteButton(foodId: food.id),
+                    ),
                   ],
                 ),
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mantra_application/common/static/navigation_route.dart'; // TAMBAHKAN
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key});
@@ -21,7 +22,7 @@ class HomeHeader extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              // TODO: Navigate to settings screen
+              Navigator.pushNamed(context, NavigationRoute.settingsRoute.name);
             },
             icon: const Icon(
               Icons.settings,

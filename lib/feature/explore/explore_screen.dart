@@ -1,17 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-<<<<<<< HEAD
-import 'package:mantra_application/feature/provider/explore_list_provider.dart';
-import 'package:provider/provider.dart';
-import 'package:mantra_application/feature/static/explore_list_result_state.dart';
-import 'package:mantra_application/feature/explore/explore_card_widget.dart';
-=======
 import 'package:mantra_application/common/static/explore_list_result_state.dart';
 import 'package:mantra_application/feature/provider/explore_list_provider.dart';
 import 'package:mantra_application/feature/widgets/explore_card_widget.dart';
 import 'package:provider/provider.dart';
->>>>>>> d05e63a66e89ab96d1424517538b04f5d670aa9d
 import 'package:mantra_application/common/static/navigation_route.dart';
 
 class ExploreScreen extends StatefulWidget {
@@ -55,24 +48,18 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
-<<<<<<< HEAD
-      backgroundColor: Colors.grey[100],
-      appBar: AppBar(
-        title: SvgPicture.asset('assets/image/appbar-logo.svg', height: 32),
-        centerTitle: false,
-        backgroundColor: Colors.white,
-        elevation: 2,
-=======
       backgroundColor: Colors.white,
+
       appBar: AppBar(
         title: SvgPicture.asset('assets/image/appbar-logo.svg', height: 40),
         centerTitle: false,
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         scrolledUnderElevation: 0,
         surfaceTintColor: Colors.transparent,
->>>>>>> d05e63a66e89ab96d1424517538b04f5d670aa9d
       ),
       body: Consumer<ExploreListProvider>(
         builder: (context, provider, child) {
@@ -83,11 +70,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
           } else if (state is ExploreListLoadedState) {
             final allFoods = state.data;
 
-<<<<<<< HEAD
-            // 🔍 Filter hasil pencarian
-=======
             // Filter hasil pencarian
->>>>>>> d05e63a66e89ab96d1424517538b04f5d670aa9d
             final filteredFoods = allFoods
                 .where(
                   (food) =>
@@ -100,11 +83,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
             return Column(
               children: [
-<<<<<<< HEAD
-                // 🔎 Search Bar
-=======
                 // Search Bar
->>>>>>> d05e63a66e89ab96d1424517538b04f5d670aa9d
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
@@ -113,14 +92,26 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   child: Material(
                     elevation: 2,
                     borderRadius: BorderRadius.circular(12),
+                    color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
                     child: TextField(
                       controller: _searchController,
                       onChanged: _onSearchChanged,
+                      style: TextStyle(
+                        color: isDark ? Colors.white : Colors.black,
+                      ),
                       decoration: InputDecoration(
                         hintText: 'Cari makanan tradisional...',
-                        prefixIcon: const Icon(Icons.search),
+                        hintStyle: TextStyle(
+                          color: isDark ? Colors.grey[600] : Colors.grey,
+                        ),
+                        prefixIcon: Icon(
+                          Icons.search,
+                          color: isDark ? Colors.grey[600] : Colors.grey,
+                        ),
                         filled: true,
-                        fillColor: Colors.white,
+                        fillColor: isDark
+                            ? const Color(0xFF1E1E1E)
+                            : Colors.white,
                         contentPadding: const EdgeInsets.symmetric(
                           vertical: 0,
                           horizontal: 16,
@@ -134,22 +125,17 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   ),
                 ),
 
-<<<<<<< HEAD
-                // 📜 Daftar ExploreCard
-=======
->>>>>>> d05e63a66e89ab96d1424517538b04f5d670aa9d
                 Expanded(
                   child: filteredFoods.isEmpty
-                      ? const Center(
+                      ? Center(
                           child: Text(
                             "Tidak ada makanan ditemukan.",
-                            style: TextStyle(fontSize: 16),
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: isDark ? Colors.white70 : Colors.black87,
+                            ),
                           ),
                         )
-<<<<<<< HEAD
-                      : ListView.builder(
-                          itemCount: filteredFoods.length,
-=======
                       : ListView.separated(
                           itemCount: filteredFoods.length,
                           padding: const EdgeInsets.symmetric(
@@ -158,7 +144,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
                           ),
                           separatorBuilder: (context, index) =>
                               const SizedBox(height: 14),
->>>>>>> d05e63a66e89ab96d1424517538b04f5d670aa9d
                           itemBuilder: (context, index) => ExploreCard(
                             food: filteredFoods[index],
                             onTap: () {
@@ -174,7 +159,14 @@ class _ExploreScreenState extends State<ExploreScreen> {
               ],
             );
           } else if (state is ExploreListErrorState) {
-            return Center(child: Text(state.error));
+            return Center(
+              child: Text(
+                state.error,
+                style: TextStyle(
+                  color: isDark ? Colors.white70 : Colors.black87,
+                ),
+              ),
+            );
           } else {
             return const SizedBox();
           }

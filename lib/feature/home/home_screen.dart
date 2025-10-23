@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [
@@ -54,7 +54,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           style: TextStyle(
                             fontWeight: FontWeight.w700,
                             fontSize: 21,
-                            color: Colors.black87,
+                            // color: Colors.black87,
+                            color: Theme.of(context).colorScheme.onSurface,
                           ),
                         ),
                       ),
@@ -126,7 +127,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             style: TextStyle(
                               fontWeight: FontWeight.w700,
                               fontSize: 21,
-                              color: Colors.black87,
+                              // color: Colors.black87,
+                              color: Theme.of(context).colorScheme.onSurface,
                             ),
                           ),
                           IconButton(

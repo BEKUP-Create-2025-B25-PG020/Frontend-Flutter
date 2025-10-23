@@ -13,7 +13,7 @@ class FeaturedFoodCard extends StatelessWidget {
       child: Container(
         width: 350,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).cardColor, // ← GANTI
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
@@ -56,19 +56,21 @@ class FeaturedFoodCard extends StatelessWidget {
                 children: [
                   Text(
                     food.name,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 14,
-                      color: Colors.black,
+                      color: Theme.of(context).colorScheme.onSurface, // ← GANTI
                     ),
                   ),
                   const SizedBox(height: 2),
                   Text(
                     food.region.regionName,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 12,
-                      color: Colors.black87,
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.onSurfaceVariant, // ← GANTI
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -76,9 +78,11 @@ class FeaturedFoodCard extends StatelessWidget {
                     food.shortDescription,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 12,
-                      color: Colors.black87,
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.onSurfaceVariant, // ← GANTI
                       height: 1.4,
                     ),
                   ),

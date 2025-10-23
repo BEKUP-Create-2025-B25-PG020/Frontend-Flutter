@@ -11,6 +11,8 @@ class BodyOfDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     final facts = food.interestingFacts
         .split(RegExp(r'\.\s*'))
         .where((f) => f.trim().isNotEmpty)
@@ -88,10 +90,10 @@ class BodyOfDetailScreen extends StatelessWidget {
                       alignment: Alignment.centerLeft,
                       child: Text(
                         food.name,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 21,
                           fontWeight: FontWeight.w700,
-                          color: const Color(0xFF7BBF3A),
+                          color: Color(0xFF7BBF3A),
                         ),
                       ),
                     ),
@@ -112,10 +114,21 @@ class BodyOfDetailScreen extends StatelessWidget {
                   SizedBox(
                     child: Row(
                       children: [
-                        Icon(Icons.pin_drop_outlined, size: 18),
-                        SizedBox.square(dimension: 4),
+                        Icon(
+                          Icons.pin_drop_outlined,
+                          size: 18,
+                          color: isDark
+                              ? Colors.white70
+                              : Colors.black87, // ← TAMBAH
+                        ),
+                        const SizedBox.square(dimension: 4),
                         Text(
                           '${food.region.regionName}, ${food.region.island}',
+                          style: TextStyle(
+                            color: isDark
+                                ? Colors.white70
+                                : Colors.black87, // ← TAMBAH
+                          ),
                         ),
                       ],
                     ),
@@ -129,7 +142,11 @@ class BodyOfDetailScreen extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   food.longDescription,
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    color: isDark ? Colors.white : Colors.black, // ← TAMBAH
+                  ),
                 ),
               ),
             ),
@@ -138,19 +155,21 @@ class BodyOfDetailScreen extends StatelessWidget {
               child: Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF4F4F4),
+                  color: isDark
+                      ? const Color(0xFF1E1E1E)
+                      : const Color(0xFFF4F4F4), // ← GANTI
                   borderRadius: BorderRadius.circular(12),
                 ),
                 padding: const EdgeInsets.all(14),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'Sejarah',
                       style: TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.w700,
-                        color: const Color(0xFF7BBF3A),
+                        color: Color(0xFF7BBF3A),
                       ),
                     ),
                     const SizedBox(height: 6),
@@ -160,6 +179,7 @@ class BodyOfDetailScreen extends StatelessWidget {
                         fontSize: 14.5,
                         fontWeight: FontWeight.w500,
                         height: 1.5,
+                        color: isDark ? Colors.white : Colors.black, // ← TAMBAH
                       ),
                     ),
                   ],
@@ -171,19 +191,21 @@ class BodyOfDetailScreen extends StatelessWidget {
               child: Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF5F5F5),
+                  color: isDark
+                      ? const Color(0xFF1E1E1E)
+                      : const Color(0xFFF5F5F5), // ← GANTI
                   borderRadius: BorderRadius.circular(12),
                 ),
                 padding: const EdgeInsets.all(14),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'Fakta Menarik',
                       style: TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.w700,
-                        color: const Color(0xFF7BBF3A),
+                        color: Color(0xFF7BBF3A),
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -195,17 +217,26 @@ class BodyOfDetailScreen extends StatelessWidget {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
+                            Text(
                               '• ',
-                              style: TextStyle(fontSize: 18, height: 1.4),
+                              style: TextStyle(
+                                fontSize: 18,
+                                height: 1.4,
+                                color: isDark
+                                    ? Colors.white
+                                    : Colors.black, // ← TAMBAH
+                              ),
                             ),
                             Expanded(
                               child: Text(
                                 '${text.trim()}.', // add period back
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 14.5,
                                   height: 1.4,
                                   fontWeight: FontWeight.w500,
+                                  color: isDark
+                                      ? Colors.white
+                                      : Colors.black, // ← TAMBAH
                                 ),
                               ),
                             ),
@@ -234,7 +265,7 @@ class BodyOfDetailScreen extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 14),
-                        child: Text(
+                        child: const Text(
                           'Galeri Foto',
                           style: TextStyle(
                             fontSize: 17,

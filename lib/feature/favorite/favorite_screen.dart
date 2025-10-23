@@ -10,6 +10,7 @@ class FavoriteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     final favoriteProvider = context.watch<FavoriteProvider>();
     final foodProvider = context.watch<FoodProvider>();
 
@@ -18,9 +19,8 @@ class FavoriteScreen extends StatelessWidget {
         .toList();
 
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         surfaceTintColor: Colors.transparent,
         centerTitle: false,
@@ -29,10 +29,13 @@ class FavoriteScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         child: favoriteFoods.isEmpty
-            ? const Center(
+            ? Center(
                 child: Text(
                   "Belum ada makanan favorit.",
-                  style: TextStyle(fontSize: 16, color: Colors.black54),
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: isDark ? Colors.white60 : Colors.black54,
+                  ),
                 ),
               )
             : ListView.separated(
@@ -52,7 +55,7 @@ class FavoriteScreen extends StatelessWidget {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
@@ -90,19 +93,23 @@ class FavoriteScreen extends StatelessWidget {
                                 children: [
                                   Text(
                                     food.name,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontWeight: FontWeight.w700,
                                       fontSize: 15,
-                                      color: Colors.black,
+                                      color: isDark
+                                          ? Colors.white
+                                          : Colors.black,
                                     ),
                                   ),
                                   const SizedBox(height: 3),
                                   Text(
                                     food.region.regionName,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 13,
-                                      color: Colors.black87,
+                                      color: isDark
+                                          ? Colors.white70
+                                          : Colors.black87,
                                     ),
                                   ),
                                   const SizedBox(height: 6),
@@ -110,9 +117,11 @@ class FavoriteScreen extends StatelessWidget {
                                     food.shortDescription,
                                     maxLines: 3,
                                     overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 12,
-                                      color: Colors.black87,
+                                      color: isDark
+                                          ? Colors.white60
+                                          : Colors.black87,
                                       height: 1.3,
                                     ),
                                   ),

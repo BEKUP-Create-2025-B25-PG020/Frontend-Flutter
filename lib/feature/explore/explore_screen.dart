@@ -48,12 +48,13 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         title: SvgPicture.asset('assets/image/appbar-logo.svg', height: 40),
         centerTitle: false,
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         scrolledUnderElevation: 0,
         surfaceTintColor: Colors.transparent,
@@ -89,14 +90,32 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   child: Material(
                     elevation: 2,
                     borderRadius: BorderRadius.circular(12),
+                    color: isDark
+                        ? const Color(0xFF1E1E1E)
+                        : Colors.white,
                     child: TextField(
                       controller: _searchController,
                       onChanged: _onSearchChanged,
+                      style: TextStyle(
+                        color: isDark ? Colors.white : Colors.black,
+                      ),
                       decoration: InputDecoration(
                         hintText: 'Cari makanan tradisional...',
-                        prefixIcon: const Icon(Icons.search),
+                        hintStyle: TextStyle(
+                          color: isDark
+                              ? Colors.grey[600]
+                              : Colors.grey, 
+                        ),
+                        prefixIcon: Icon(
+                          Icons.search,
+                          color: isDark
+                              ? Colors.grey[600]
+                              : Colors.grey, 
+                        ),
                         filled: true,
-                        fillColor: Colors.white,
+                        fillColor: isDark
+                            ? const Color(0xFF1E1E1E)
+                            : Colors.white, 
                         contentPadding: const EdgeInsets.symmetric(
                           vertical: 0,
                           horizontal: 16,
@@ -112,10 +131,15 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
                 Expanded(
                   child: filteredFoods.isEmpty
-                      ? const Center(
+                      ? Center(
                           child: Text(
                             "Tidak ada makanan ditemukan.",
-                            style: TextStyle(fontSize: 16),
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: isDark
+                                  ? Colors.white70
+                                  : Colors.black87,
+                            ),
                           ),
                         )
                       : ListView.separated(
@@ -141,7 +165,14 @@ class _ExploreScreenState extends State<ExploreScreen> {
               ],
             );
           } else if (state is ExploreListErrorState) {
-            return Center(child: Text(state.error));
+            return Center(
+              child: Text(
+                state.error,
+                style: TextStyle(
+                  color: isDark ? Colors.white70 : Colors.black87,
+                ),
+              ),
+            );
           } else {
             return const SizedBox();
           }

@@ -12,14 +12,24 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return BottomNavigationBar(
-      backgroundColor: Colors.white,
+      backgroundColor: isDark
+          ? const Color(0xFF1E1E1E)
+          : Colors.white, // ← GANTI
       currentIndex: currentIndex,
       onTap: onTap,
       type: BottomNavigationBarType.fixed,
       selectedItemColor: MantraColors.primaryColors,
-      unselectedItemColor: Colors.grey,
+      unselectedItemColor: isDark ? Colors.grey[600] : Colors.grey, // ← GANTI
       showUnselectedLabels: true,
+      selectedLabelStyle: TextStyle(
+        color: isDark ? Colors.white : Colors.black, // ← TAMBAH
+      ),
+      unselectedLabelStyle: TextStyle(
+        color: isDark ? Colors.grey[600] : Colors.grey, // ← TAMBAH
+      ),
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.home_outlined),

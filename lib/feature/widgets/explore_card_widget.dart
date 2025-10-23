@@ -9,12 +9,14 @@ class ExploreCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
         width: 350,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: isDark ? const Color(0xFF1E1E1E) : Colors.white, 
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
@@ -57,19 +59,21 @@ class ExploreCard extends StatelessWidget {
                 children: [
                   Text(
                     food.name,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 14,
-                      color: Colors.black,
+                      color: isDark ? Colors.white : Colors.black, 
                     ),
                   ),
                   const SizedBox(height: 2),
                   Text(
                     food.region.regionName,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 12,
-                      color: Colors.black87,
+                      color: isDark
+                          ? Colors.white70
+                          : Colors.black87, 
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -77,9 +81,11 @@ class ExploreCard extends StatelessWidget {
                     food.shortDescription,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 12,
-                      color: Colors.black87,
+                      color: isDark
+                          ? Colors.white60
+                          : Colors.black87, 
                       height: 1.4,
                     ),
                   ),

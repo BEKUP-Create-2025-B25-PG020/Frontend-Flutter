@@ -13,10 +13,10 @@ class SettingsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(
         context,
-      ).scaffoldBackgroundColor, // TAMBAHKAN INI
+      ).scaffoldBackgroundColor, 
       appBar: AppBar(
-        backgroundColor: Colors.transparent, // TAMBAHKAN INI
-        elevation: 0, // TAMBAHKAN INI
+        backgroundColor: Colors.transparent, 
+        elevation: 0, 
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),

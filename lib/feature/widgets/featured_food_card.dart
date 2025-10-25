@@ -8,12 +8,13 @@ class FeaturedFoodCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return GestureDetector(
       onTap: onTap,
       child: Container(
         width: 350,
         decoration: BoxDecoration(
-          color: Theme.of(context).cardColor, // ← GANTI
+          color: isDark ? const Color(0xFF1E1E1E) : Colors.white, // ← GANTI
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(

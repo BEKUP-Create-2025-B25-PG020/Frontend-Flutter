@@ -16,7 +16,6 @@ class FoodCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -77,7 +76,9 @@ class FoodCard extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: compact ? 11 : 12,
-                      color: isDark ? Colors.white70 : Colors.black87, // ← GANTI
+                      color: isDark
+                          ? Colors.white70
+                          : Colors.black87, // ← GANTI
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -87,7 +88,9 @@ class FoodCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: compact ? 11 : 12,
-                      color: isDark ? Colors.white60 : Colors.black87, // ← GANTI
+                      color: isDark
+                          ? Colors.white60
+                          : Colors.black87, // ← GANTI
                       height: 1.4,
                     ),
                   ),

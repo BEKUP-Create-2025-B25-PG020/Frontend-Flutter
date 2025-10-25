@@ -29,7 +29,6 @@ class _AboutScreenState extends State<AboutScreen> {
   Widget build(BuildContext context) {
     final isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
-    final screenWidth = MediaQuery.of(context).size.width;
     final logoSize = isLandscape ? 150.0 : 200.0;
 
     return Scaffold(

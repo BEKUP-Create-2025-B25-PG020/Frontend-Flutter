@@ -7,6 +7,7 @@ import 'package:mantra_application/common/static/navigation_route.dart';
 import 'package:mantra_application/common/style/theme/mantra_theme.dart';
 import 'package:mantra_application/core/data/service/http_service.dart';
 import 'package:mantra_application/feature/detail/detail_screen.dart';
+import 'package:mantra_application/feature/onboarding/onboarding_screen.dart';
 import 'package:mantra_application/feature/settings/screen/about_screen.dart';
 import 'package:mantra_application/feature/settings/screen/settings_screen.dart';
 import 'package:mantra_application/feature/provider/explore_list_provider.dart';
@@ -61,7 +62,9 @@ class MainApp extends StatelessWidget {
           themeMode: themeProvider.themeMode,
           initialRoute: NavigationRoute.mainRoute.name,
           routes: {
-            NavigationRoute.mainRoute.name: (context) => const MainScreen(),
+            NavigationRoute.mainRoute.name: (context) =>
+                const OnboardingScreen(),
+            NavigationRoute.homeroute.name: (context) => const MainScreen(),
             NavigationRoute.detailRoute.name: (context) => DetailScreen(
               foodId: ModalRoute.of(context)?.settings.arguments as int,
             ),

@@ -31,4 +31,16 @@ class Food {
       category: Category.fromJson(json["category"]),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'short_description': shortDescription,
+      'main_image_url': mainImageUrl,
+      'is_featured': isFeatured,
+      'region': region.toJson(),
+      'category': category.toJson(),
+    };
+  }
 }

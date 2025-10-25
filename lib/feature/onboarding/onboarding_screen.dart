@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:mantra_application/common/screen/main_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
+
+  Future<void> _completeOnboarding(BuildContext context) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('hasSeenOnboarding', true);
+
+    // Navigate to Home, and remove Onboarding from stack
+    Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +33,7 @@ class OnboardingScreen extends StatelessWidget {
               ),
             ),
 
+            // Title Text
             RichText(
               textAlign: TextAlign.center,
               text: const TextSpan(
@@ -46,10 +55,11 @@ class OnboardingScreen extends StatelessWidget {
               ),
             ),
 
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: const Text(
-                "Nikmati Kekayaan Rasa dari\nsetiap sudut nusantara.\nMulai pekerjaan kulinermu sekarang!",
+            // Description
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24),
+              child: Text(
+                "Nikmati Kekayaan Rasa dari\nsetiap sudut nusantara.\nMulai petualangan kulinermu sekarang!",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: 'Poppins',
@@ -62,6 +72,7 @@ class OnboardingScreen extends StatelessWidget {
 
             const SizedBox(height: 24),
 
+            // Play / Next button
             SizedBox(
               width: 50,
               height: 50,
@@ -71,12 +82,7 @@ class OnboardingScreen extends StatelessWidget {
                   shape: const CircleBorder(),
                   padding: EdgeInsets.zero,
                 ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => MainScreen()),
-                  );
-                },
+                onPressed: () => _completeOnboarding(context),
                 child: const Icon(
                   Icons.play_arrow,
                   color: Colors.white,

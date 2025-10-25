@@ -16,10 +16,15 @@ import 'package:mantra_application/feature/provider/featured_food_provider.dart'
 import 'package:mantra_application/feature/provider/food_detail_provider.dart';
 import 'package:mantra_application/feature/provider/food_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
+
+  final prefs = await SharedPreferences.getInstance();
+  final hasSeenOnboarding = prefs.getBool('hasSeenOnboarding') ?? false;
+
   runApp(
     MultiProvider(
       providers: [
@@ -27,11 +32,13 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (context) => IndexNavProvider()),
         Provider(create: (context) => HttpService()),
         ChangeNotifierProvider(
+          lazy: true,
           create: (context) =>
               FeaturedFoodProvider(httpService: context.read<HttpService>()),
         ),
         ChangeNotifierProvider(create: (context) => FavoriteProvider()),
         ChangeNotifierProvider(
+          lazy: true,
           create: (context) =>
               FoodProvider(httpService: context.read<HttpService>()),
         ),
@@ -43,13 +50,15 @@ Future<void> main() async {
           create: (context) => ExploreListProvider(context.read<HttpService>()),
         ),
       ],
-      child: const MainApp(),
+      child: MainApp(hasSeenOnboarding: hasSeenOnboarding),
     ),
   );
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  final bool hasSeenOnboarding;
+
+  const MainApp({super.key, required this.hasSeenOnboarding});
 
   @override
   Widget build(BuildContext context) {
@@ -60,10 +69,12 @@ class MainApp extends StatelessWidget {
           theme: MantraTheme.lightTheme,
           darkTheme: MantraTheme.darkTheme,
           themeMode: themeProvider.themeMode,
-          initialRoute: NavigationRoute.mainRoute.name,
+
+          home: hasSeenOnboarding
+              ? const MainScreen()
+              : const OnboardingScreen(),
+
           routes: {
-            NavigationRoute.mainRoute.name: (context) =>
-                const OnboardingScreen(),
             NavigationRoute.homeroute.name: (context) => const MainScreen(),
             NavigationRoute.detailRoute.name: (context) => DetailScreen(
               foodId: ModalRoute.of(context)?.settings.arguments as int,

@@ -55,10 +55,10 @@ flutter_native_splash:
   android: true
   ios: true
   web: false
-  
+
   color_dark: "#121212"
   image_dark: assets/image/appbar-logo.png
-  
+
   android_12:
     image: assets/image/appbar-logo.png
     color: "#FFFFFF"

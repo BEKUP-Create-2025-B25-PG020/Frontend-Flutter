@@ -22,10 +22,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() {
-      context.read<FeaturedFoodProvider>().fetchFeaturedFoods(limit: 5);
-      context.read<FoodProvider>().fetchFoods();
-    });
   }
 
   @override
@@ -40,7 +36,6 @@ class _HomeScreenState extends State<HomeScreen> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    // TODO: Add Banner, Recommendation List, and List Traditional Foods
                     HomeBanner(),
                     Padding(
                       padding: const EdgeInsets.symmetric(
@@ -240,6 +235,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         return const SizedBox();
                       },
                     ),
+                    const SizedBox(height: 8),
                   ],
                 ),
               ),
